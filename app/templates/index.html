@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block title %}InterviewCoach — Practice interviews that fit the job{% endblock %}
+{% block content %}
+
+<!-- Hero -->
+<section class="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+  <div>
+    <span class="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700 ring-1 ring-inset ring-brand-200 dark:bg-brand-500/10 dark:text-brand-300 dark:ring-brand-500/20">
+      <span class="h-1.5 w-1.5 rounded-full bg-brand-500"></span> Runs offline · no API key required
+    </span>
+    <h1 class="mt-4 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl">
+      Practice interviews that<br class="hidden sm:block" />
+      actually <span class="ic-gradient-text">fit the job.</span>
+    </h1>
+    <p class="mt-4 max-w-xl text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+      Paste a job description and get role-specific questions. Type an answer and get
+      instant, rubric-based scoring on relevance, specificity, structure, and impact —
+      with feedback you can act on.
+    </p>
+
+    <div class="mt-7 flex flex-wrap items-center gap-3">
+      <a href="/demo"
+         class="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 transition hover:bg-brand-700">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Try the live demo
+      </a>
+      <a href="/signup"
+         class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white/70 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-200 dark:hover:bg-slate-800">
+        Create a free account
+      </a>
+    </div>
+    <p class="mt-3 text-sm text-slate-500 dark:text-slate-400">
+      The demo logs you into a seeded account — no signup, no keys. Explore a real scored session in one click.
+    </p>
+  </div>
+
+  <!-- Hero proof card: a sample scored answer -->
+  <div class="ic-card p-6 sm:p-7">
+    <div class="flex items-center justify-between">
+      <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:ring-emerald-500/20">
+        <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Scored answer
+      </span>
+      <span class="text-xs font-medium text-slate-400">Backend Engineer · Impact</span>
+    </div>
+
+    <div class="mt-5 flex items-center gap-5">
+      <div class="ic-ring shrink-0" style="--pct: 82; --size: 7rem;">
+        <span class="block text-2xl font-extrabold text-slate-800 dark:text-slate-100">82</span>
+        <span class="block text-[10px] font-semibold uppercase tracking-wider text-slate-400">overall</span>
+      </div>
+      <ul class="flex-1 space-y-2.5">
+        {% set demo_axes = [("Relevance", 5, "high"), ("Specificity", 4, "high"), ("Structure", 4, "high"), ("Impact", 5, "high")] %}
+        {% for label, score, tone in demo_axes %}
+        <li>
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-medium text-slate-600 dark:text-slate-300">{{ label }}</span>
+            <span class="font-semibold text-slate-700 dark:text-slate-200">{{ score }}/5</span>
+          </div>
+          <div class="ic-meter ic-meter--{{ tone }} mt-1"><span style="width: {{ (score / 5 * 100)|int }}%"></span></div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <p class="mt-5 rounded-lg bg-slate-50 px-4 py-3 text-sm leading-relaxed text-slate-600 dark:bg-slate-900/50 dark:text-slate-300">
+      <span class="font-semibold text-slate-800 dark:text-slate-100">Strong answer.</span>
+      Grounded in concrete, quantified detail and demonstrates clear, owned impact.
+    </p>
+  </div>
+</section>
+
+<!-- Proof / trust signals -->
+<section class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
+  {% set stats = [
+    ("0", "API keys to try it", "Deterministic offline stub grades every answer"),
+    ("4", "weighted rubric axes", "Impact 1.25× · Structure 0.75×"),
+    ("29", "automated tests", "Green offline; CI on Python 3.9–3.12"),
+    ("<1ms", "to score an answer", "Synchronous, single round-trip locally")
+  ] %}
+  {% for big, label, sub in stats %}
+  <div class="ic-card p-5">
+    <div class="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">{{ big }}</div>
+    <div class="mt-1 text-sm font-semibold text-slate-600 dark:text-slate-300">{{ label }}</div>
+    <div class="mt-1 text-xs text-slate-400 dark:text-slate-500">{{ sub }}</div>
+  </div>
+  {% endfor %}
+</section>
+
+<!-- How it works -->
+<section class="mt-14">
+  <div class="text-center">
+    <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">From job post to honest feedback</h2>
+    <p class="mt-2 text-slate-600 dark:text-slate-300">Three steps. No setup, no waiting on a human mock interviewer.</p>
+  </div>
+
+  <div class="mt-8 grid gap-5 md:grid-cols-3">
+    {% set steps = [
+      ("1", "Paste the job description", "We extract the competencies the role rewards and generate role-specific technical and behavioural questions.", "M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"),
+      ("2", "Type your answer", "Answer in your own words. The same provider interface runs offline or against a live model — no code change.", "M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"),
+      ("3", "Get a rubric score", "Each answer is graded 1–5 on four weighted axes with a reason per axis, an overall verdict, and concrete next steps.", "M3 3v18h18M7 16l4-6 4 3 5-7")
+    ] %}
+    {% for num, title, body, path in steps %}
+    <div class="ic-card p-6">
+      <div class="flex items-center gap-3">
+        <span class="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-brand-600 to-violet-500 text-sm font-bold text-white shadow-md shadow-brand-500/30">{{ num }}</span>
+        <span class="grid h-9 w-9 place-items-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ path }}"/></svg>
+        </span>
+      </div>
+      <h3 class="mt-4 font-semibold text-slate-900 dark:text-slate-50">{{ title }}</h3>
+      <p class="mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{{ body }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="mt-14">
+  <div class="ic-card overflow-hidden p-8 text-center sm:p-10">
+    <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">Ready to practise?</h2>
+    <p class="mx-auto mt-2 max-w-xl text-slate-600 dark:text-slate-300">
+      Jump straight into a seeded session, or sign up to save your own. Either way it runs locally with no API key.
+    </p>
+    <div class="mt-6 flex flex-wrap justify-center gap-3">
+      <a href="/demo" class="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-500/25 transition hover:bg-brand-700">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Try the live demo
+      </a>
+      <a href="/signup" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white/70 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-200 dark:hover:bg-slate-800">
+        Create a free account
+      </a>
+    </div>
+    <p class="mt-4 text-xs text-slate-400 dark:text-slate-500">
+      Demo login: <code class="rounded bg-slate-100 px-1.5 py-0.5 font-mono dark:bg-slate-800">{{ demo_email }}</code> / <code class="rounded bg-slate-100 px-1.5 py-0.5 font-mono dark:bg-slate-800">{{ demo_password }}</code>
+    </p>
+  </div>
+</section>
+
+{% endblock %}

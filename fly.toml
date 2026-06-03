@@ -1,0 +1,36 @@
+# Fly.io app config — deploy the single container.
+#   fly launch --no-deploy --copy-config   (creates the app from this file)
+#   fly volume create interviewcoach_data --size 1
+#   fly secrets set SECRET_KEY=$(python -c "import secrets; print(secrets.token_hex(32))")
+#   fly deploy
+app = "interviewcoach"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  DATABASE_URL = "sqlite:////data/interviewcoach.db"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [http_service.checks]
+    [[http_service.checks.http]]
+      path = "/health"
+      interval = "30s"
+      timeout = "3s"
+
+# Persist SQLite across restarts. Create the volume before first deploy:
+#   fly volume create interviewcoach_data --size 1
+[[mounts]]
+  source = "interviewcoach_data"
+  destination = "/data"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"

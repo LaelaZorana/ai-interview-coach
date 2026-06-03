@@ -1,0 +1,23 @@
+# Render Blueprint — deploy the single container.
+# Push this repo to GitHub, then in Render: New > Blueprint and pick the repo.
+services:
+  - type: web
+    name: interviewcoach
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true
+    # Persist the SQLite database across deploys/restarts.
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        value: sqlite:////data/interviewcoach.db
+      # To use a live model instead of the offline stub, add a key in the
+      # Render dashboard (kept out of source control):
+      # - key: ANTHROPIC_API_KEY
+      #   sync: false

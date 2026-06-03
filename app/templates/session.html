@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ session.role_title }} · InterviewCoach{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-3xl">
+  <a href="/dashboard" class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400">
+    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to dashboard
+  </a>
+
+  <!-- Session header -->
+  <div class="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+    <div class="min-w-0">
+      <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">{{ session.role_title }}</h1>
+      <p class="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500 dark:text-slate-400">
+        <span class="inline-flex items-center gap-1.5">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          {{ session.answered_count }}/{{ session.answers|length }} answered
+        </span>
+        {% if session.average_percent is not none %}
+        <span class="inline-flex items-center gap-1.5">
+          <span class="h-1 w-1 rounded-full bg-slate-300 dark:bg-slate-600"></span>
+          average <span class="font-semibold text-slate-700 dark:text-slate-200">{{ session.average_percent }}/100</span>
+        </span>
+        {% endif %}
+      </p>
+    </div>
+    {% if session.average_percent is not none %}
+    <div class="ic-ring shrink-0" style="--pct: {{ session.average_percent }}; --size: 4.5rem;">
+      <span class="block text-lg font-extrabold text-slate-800 dark:text-slate-100">{{ session.average_percent }}</span>
+      <span class="block text-[9px] font-semibold uppercase tracking-wider text-slate-400">avg</span>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- JD fold -->
+  <details class="ic-card group mt-5 overflow-hidden">
+    <summary class="ic-focus flex cursor-pointer list-none items-center justify-between px-5 py-3.5 text-sm font-medium text-slate-700 dark:text-slate-200">
+      <span class="inline-flex items-center gap-2">
+        <svg class="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Job description
+      </span>
+      <svg class="h-4 w-4 text-slate-400 transition group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </summary>
+    <div class="border-t border-slate-200/70 px-5 py-4 dark:border-slate-800/70">
+      <pre class="whitespace-pre-wrap font-sans text-sm leading-relaxed text-slate-600 dark:text-slate-300">{{ session.job_description }}</pre>
+    </div>
+  </details>
+
+  <!-- Questions -->
+  <div class="mt-6 space-y-5">
+    {% for item in answers %}
+      {% include "_answer_card.html" %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

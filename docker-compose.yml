@@ -1,0 +1,20 @@
+# Single-service compose for local container runs.
+# `docker compose up` then open http://localhost:8000
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      # Generate a real secret for anything beyond local play.
+      SECRET_KEY: ${SECRET_KEY:-dev-insecure-change-me}
+      DATABASE_URL: sqlite:////data/interviewcoach.db
+      # Provide a key to switch from the offline stub to a live model.
+      # LLM_PROVIDER: anthropic
+      # ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+    volumes:
+      - interviewcoach_data:/data
+    restart: unless-stopped
+
+volumes:
+  interviewcoach_data:

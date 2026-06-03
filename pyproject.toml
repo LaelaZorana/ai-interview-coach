@@ -1,0 +1,27 @@
+[project]
+name = "interviewcoach"
+version = "1.0.0"
+description = "AI interview coach: role-specific questions and rubric-based answer scoring."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Laela Zorana" }]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+filterwarnings = ["error::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+extend-exclude = [".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B"]
+# E501: long lines in the stub question bank are intentional.
+# B008: Depends()/Form() in argument defaults is the idiomatic FastAPI pattern.
+# Note: pyupgrade (UP) rules are intentionally NOT enabled — the code targets
+# Python 3.9, where PEP 604 ("X | Y") unions break SQLAlchemy's Mapped[...]
+# annotation resolution, so typing.Optional/List are used on purpose.
+ignore = ["E501", "B008"]
