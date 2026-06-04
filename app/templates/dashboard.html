@@ -24,7 +24,7 @@
   <svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-600 dark:text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   <p>
     {% if stats.total_answered == 0 %}
-      Your questions are ready whenever you are. Take one at a time — there's no clock here.
+      Your questions are ready whenever you are. Take one at a time. There's no clock here.
     {% else %}
       You've worked through <span class="font-semibold text-stone-800 dark:text-stone-100">{{ stats.total_answered }}</span>
       answer{{ "s" if stats.total_answered != 1 else "" }} so far. Steady practice is exactly how this gets easier.
@@ -101,7 +101,7 @@
     </span>
     <div>
       <h3 class="text-lg font-semibold text-stone-800 dark:text-stone-100">Let's begin when you're ready</h3>
-      <p class="mx-auto mt-1 max-w-sm text-sm text-stone-500 dark:text-stone-400">Paste a job description and your coach will draw up a first set of role-specific questions — no rush.</p>
+      <p class="mx-auto mt-1 max-w-sm text-sm text-stone-500 dark:text-stone-400">Paste a job description and your coach will draw up a first set of role-specific questions, no rush.</p>
     </div>
     <a href="/sessions/new"
        class="ic-focus inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-brand-700/20 transition hover:bg-brand-700">

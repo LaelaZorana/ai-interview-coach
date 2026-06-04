@@ -33,7 +33,7 @@ AXES: List[Axis] = [
     Axis(
         id="specificity",
         label="Specificity",
-        description="Concrete details, real examples, numbers — not vague generalities.",
+        description="Concrete details, real examples, numbers, not vague generalities.",
         weight=1.0,
     ),
     Axis(
