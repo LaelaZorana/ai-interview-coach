@@ -1,16 +1,16 @@
-/* InterviewCoach design system — the "Calm Coach" identity.
+/* InterviewCoach design system: the "Calm Coach" identity.
    Focused, confident, supportive: a steady teal voice with a sage + soft-blue
    supporting cast on a warm-neutral stone canvas. Generous whitespace, gentle
    motion, light + dark. Built on Tailwind utilities; this file holds the few
    bespoke components (rings, meters, washes) the utilities can't express well. */
 
 :root {
-  --ic-teal: 13 148 136;          /* teal-600  — primary */
-  --ic-teal-strong: 15 118 110;   /* teal-700  — deep    */
-  --ic-sage: 94 128 80;           /* sage-500  — calm support */
-  --ic-sky: 58 130 179;           /* soft blue — accent  */
+  --ic-teal: 13 148 136;          /* teal-600,  primary */
+  --ic-teal-strong: 15 118 110;   /* teal-700,  deep    */
+  --ic-sage: 94 128 80;           /* sage-500,  calm support */
+  --ic-sky: 58 130 179;           /* soft blue, accent  */
 
-  /* Semantic score bands — kept soft and encouraging, never alarming. */
+  /* Semantic score bands, kept soft and encouraging, never alarming. */
   --ic-good: 16 185 129;          /* emerald  */
   --ic-mid:  217 160 60;          /* warm amber */
   --ic-low:  219 139 119;         /* soft terracotta (not a harsh red) */
@@ -29,7 +29,7 @@ body {
 /* Calmer headings: a touch lighter and more relaxed than a shouty SaaS bold. */
 h1, h2, h3 { letter-spacing: -0.011em; }
 
-/* Subtle page wash — soft teal warmth from the corners, never busy. */
+/* Subtle page wash: soft teal warmth from the corners, never busy. */
 .ic-bg {
   background-image:
     radial-gradient(58rem 58rem at 108% -12%, rgb(var(--ic-sky) / 0.10), transparent 56%),
@@ -44,7 +44,7 @@ h1, h2, h3 { letter-spacing: -0.011em; }
     radial-gradient(46rem 46rem at 50% 118%, rgb(var(--ic-sage) / 0.10), transparent 60%);
 }
 
-/* Brand text — a gentle teal -> soft-blue blend. */
+/* Brand text: a gentle teal -> soft-blue blend. */
 .ic-gradient-text {
   background-image: linear-gradient(
     100deg, rgb(var(--ic-teal-strong)), rgb(var(--ic-sky))
@@ -54,7 +54,7 @@ h1, h2, h3 { letter-spacing: -0.011em; }
   color: transparent;
 }
 
-/* Card — soft, breathable, warm-neutral. */
+/* Card: soft, breathable, warm-neutral. */
 .ic-card {
   border-radius: 1.1rem;
   border: 1px solid rgb(231 226 218);          /* stone-200-ish */
@@ -76,7 +76,7 @@ h1, h2, h3 { letter-spacing: -0.011em; }
   background: rgb(18 30 28 / 0.5);
 }
 
-/* Score / axis meter — rounded, gently animated. */
+/* Score / axis meter: rounded, gently animated. */
 .ic-meter {
   height: 0.5rem;
   border-radius: 999px;
@@ -91,12 +91,12 @@ h1, h2, h3 { letter-spacing: -0.011em; }
   background: linear-gradient(90deg, rgb(var(--ic-teal)), rgb(var(--ic-sky)));
   transition: width .6s cubic-bezier(.22,.61,.36,1);
 }
-/* Semantic meter fills by score band — soft, supportive tones. */
+/* Semantic meter fills by score band: soft, supportive tones. */
 .ic-meter--low > span    { background: linear-gradient(90deg, rgb(var(--ic-low) / 0.85), rgb(var(--ic-low))); }
 .ic-meter--mid > span    { background: linear-gradient(90deg, rgb(var(--ic-mid) / 0.85), rgb(var(--ic-mid))); }
 .ic-meter--high > span   { background: linear-gradient(90deg, rgb(var(--ic-teal)), rgb(var(--ic-good))); }
 
-/* Conic score ring (hero + verdict) — the calm focal point. */
+/* Conic score ring (hero + verdict): the calm focal point. */
 .ic-ring {
   --pct: 80;
   width: var(--size, 9rem);
@@ -161,14 +161,14 @@ h1, h2, h3 { letter-spacing: -0.011em; }
 }
 .ic-fade { animation: ic-fade-in .28s cubic-bezier(.22,.61,.36,1) both; }
 
-/* A slow, calming pulse for the "live demo" dot — a breathing rhythm. */
+/* A slow, calming pulse for the "live demo" dot: a breathing rhythm. */
 @keyframes ic-breathe {
   0%, 100% { opacity: 1; transform: scale(1); }
   50%      { opacity: 0.55; transform: scale(0.82); }
 }
 .ic-breathe { animation: ic-breathe 3.2s ease-in-out infinite; }
 
-/* Focus ring — calm teal, clearly visible. */
+/* Focus ring: calm teal, clearly visible. */
 .ic-focus:focus-visible {
   outline: none;
   box-shadow: 0 0 0 3px rgb(var(--ic-teal) / 0.4);

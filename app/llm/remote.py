@@ -1,7 +1,7 @@
 """Real LLM providers (Anthropic and OpenAI).
 
 Both share the same prompt construction and JSON parsing; only the transport
-differs. SDKs are imported lazily so the package — and the whole offline demo —
+differs. SDKs are imported lazily so the package, and the whole offline demo,
 has no hard dependency on them. If a call fails for any reason we fall back to
 the deterministic stub rather than 500-ing the request.
 """

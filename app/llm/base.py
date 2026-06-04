@@ -1,8 +1,8 @@
 """Provider-agnostic interface for question generation and answer scoring.
 
 Every concrete provider (offline stub, Anthropic, OpenAI) implements this small
-surface. The web layer only ever talks to `LLMProvider`, so swapping models — or
-running with no key at all — never touches application code.
+surface. The web layer only ever talks to `LLMProvider`, so swapping models, or
+running with no key at all, never touches application code.
 """
 from __future__ import annotations
 

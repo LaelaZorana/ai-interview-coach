@@ -1,4 +1,4 @@
-// InterviewCoach — small client helpers (theme toggle, sample-answer fill).
+// InterviewCoach: small client helpers (theme toggle, sample-answer fill).
 (function () {
   "use strict";
 

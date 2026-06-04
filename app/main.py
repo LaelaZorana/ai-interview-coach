@@ -1,4 +1,4 @@
-"""InterviewCoach — FastAPI application factory and routes.
+"""InterviewCoach: FastAPI application factory and routes.
 
 A single deployable service: FastAPI + Jinja2 + htmx, SQLite via SQLAlchemy.
 Question generation and answer scoring both go through the LLM provider

@@ -3,7 +3,7 @@
 The environment (temp SQLite DB, forced stub provider, test secret) is set
 *before* the application package is imported, so every module captures the test
 settings exactly once. Each test then gets a clean schema via drop_all/create_all
-on the single shared engine — no fragile module reloading.
+on the single shared engine. No fragile module reloading.
 """
 from __future__ import annotations
 
