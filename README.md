@@ -1,6 +1,8 @@
 # InterviewCoach
 
-Paste a job description, get role-specific interview questions, and receive instant rubric-based scoring with written feedback — a deploy-ready full-stack AI product that runs with zero API keys.
+Paste a job description, get role-specific interview questions, and receive instant rubric-based scoring with written feedback — a deploy-ready, full-stack AI product with a provider-agnostic LLM layer (Anthropic / OpenAI, or a deterministic stub for cost-free demos).
+
+> **Live demo note:** the public demo runs the deterministic stub (instant, no keys), so questions and scores are reproducible; drop in an `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` and the same code path switches to a live model — no changes.
 
 ## The problem
 
