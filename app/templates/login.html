@@ -2,15 +2,15 @@
 {% block title %}Log in · InterviewCoach{% endblock %}
 {% block content %}
 <section class="mx-auto flex max-w-md flex-col items-center pt-6 sm:pt-10">
-  <span class="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-brand-600 to-violet-500 text-white shadow-lg shadow-brand-500/30">
-    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+  <span class="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-brand-600 to-sky2-500 text-white shadow-lg shadow-brand-700/25">
+    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
   </span>
-  <h1 class="mt-4 text-2xl font-bold tracking-tight">Welcome back</h1>
-  <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Log in to pick up your practice sessions.</p>
+  <h1 class="mt-4 text-2xl font-semibold tracking-tight">Welcome back</h1>
+  <p class="mt-1 text-sm text-stone-500 dark:text-stone-400">Pick up your practice right where you left off.</p>
 
   <div class="ic-card mt-6 w-full p-6 sm:p-7">
     {% if error %}
-    <div class="mb-4 flex items-start gap-2 rounded-lg border border-rose-300/60 bg-rose-50 px-3.5 py-2.5 text-sm text-rose-700 dark:border-rose-500/30 dark:bg-rose-500/10 dark:text-rose-300">
+    <div class="mb-4 flex items-start gap-2 rounded-xl border border-[rgb(var(--ic-low))]/40 bg-[rgb(var(--ic-low))]/10 px-3.5 py-2.5 text-sm text-[rgb(var(--ic-low))]">
       <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       <span>{{ error }}</span>
     </div>
@@ -18,25 +18,25 @@
 
     <form method="post" action="/login" class="space-y-4">
       <div>
-        <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-200">Email</label>
+        <label for="email" class="block text-sm font-medium text-stone-700 dark:text-stone-200">Email</label>
         <input id="email" type="email" name="email" required autocomplete="email" placeholder="you@example.com"
-               class="ic-focus mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-brand-500 focus:ring-0 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
+               class="ic-focus mt-1.5 w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-sm text-stone-800 placeholder:text-stone-400 focus:border-brand-500 focus:ring-0 dark:border-white/15 dark:bg-white/5 dark:text-stone-100" />
       </div>
       <div>
-        <label for="password" class="block text-sm font-medium text-slate-700 dark:text-slate-200">Password</label>
+        <label for="password" class="block text-sm font-medium text-stone-700 dark:text-stone-200">Password</label>
         <input id="password" type="password" name="password" required autocomplete="current-password" placeholder="Your password"
-               class="ic-focus mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-brand-500 focus:ring-0 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100" />
+               class="ic-focus mt-1.5 w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-sm text-stone-800 placeholder:text-stone-400 focus:border-brand-500 focus:ring-0 dark:border-white/15 dark:bg-white/5 dark:text-stone-100" />
       </div>
       <button type="submit"
-              class="ic-focus w-full rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700">
+              class="ic-focus w-full rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-brand-700/20 transition hover:bg-brand-700">
         Log in
       </button>
     </form>
   </div>
 
-  <p class="mt-5 text-sm text-slate-500 dark:text-slate-400">
-    No account yet? <a href="/signup" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">Sign up</a>
-    · or <a href="/demo" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">try the demo</a>.
+  <p class="mt-5 text-sm text-stone-500 dark:text-stone-400">
+    No account yet? <a href="/signup" class="font-semibold text-brand-700 hover:underline dark:text-brand-300">Sign up</a>
+    · or <a href="/demo" class="font-semibold text-brand-700 hover:underline dark:text-brand-300">try the demo</a>.
   </p>
 </section>
 {% endblock %}

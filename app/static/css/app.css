@@ -1,80 +1,102 @@
-/* InterviewCoach design system — refinements on top of Tailwind utilities.
-   Clean modern SaaS: indigo/violet accent, Inter, generous whitespace,
-   light + dark. Shares one design language with the rest of the portfolio. */
+/* InterviewCoach design system — the "Calm Coach" identity.
+   Focused, confident, supportive: a steady teal voice with a sage + soft-blue
+   supporting cast on a warm-neutral stone canvas. Generous whitespace, gentle
+   motion, light + dark. Built on Tailwind utilities; this file holds the few
+   bespoke components (rings, meters, washes) the utilities can't express well. */
 
 :root {
-  --ic-accent: 99 102 241;        /* indigo-500  */
-  --ic-accent-strong: 79 70 229;  /* indigo-600  */
-  --ic-violet: 139 92 246;        /* violet-500  */
+  --ic-teal: 13 148 136;          /* teal-600  — primary */
+  --ic-teal-strong: 15 118 110;   /* teal-700  — deep    */
+  --ic-sage: 94 128 80;           /* sage-500  — calm support */
+  --ic-sky: 58 130 179;           /* soft blue — accent  */
+
+  /* Semantic score bands — kept soft and encouraging, never alarming. */
+  --ic-good: 16 185 129;          /* emerald  */
+  --ic-mid:  217 160 60;          /* warm amber */
+  --ic-low:  219 139 119;         /* soft terracotta (not a harsh red) */
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Inter var", Inter, ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Subtle page background gradient (light + dark). */
+/* Calmer headings: a touch lighter and more relaxed than a shouty SaaS bold. */
+h1, h2, h3 { letter-spacing: -0.011em; }
+
+/* Subtle page wash — soft teal warmth from the corners, never busy. */
 .ic-bg {
   background-image:
-    radial-gradient(60rem 60rem at 110% -10%, rgb(var(--ic-violet) / 0.10), transparent 55%),
-    radial-gradient(50rem 50rem at -10% 0%, rgb(var(--ic-accent) / 0.10), transparent 50%);
+    radial-gradient(58rem 58rem at 108% -12%, rgb(var(--ic-sky) / 0.10), transparent 56%),
+    radial-gradient(52rem 52rem at -12% -6%, rgb(var(--ic-teal) / 0.08), transparent 52%),
+    radial-gradient(46rem 46rem at 50% 118%, rgb(var(--ic-sage) / 0.07), transparent 60%);
+  background-attachment: fixed;
 }
 .dark .ic-bg {
   background-image:
-    radial-gradient(60rem 60rem at 110% -10%, rgb(var(--ic-violet) / 0.16), transparent 55%),
-    radial-gradient(50rem 50rem at -10% 0%, rgb(var(--ic-accent) / 0.14), transparent 50%);
+    radial-gradient(58rem 58rem at 108% -12%, rgb(var(--ic-sky) / 0.16), transparent 56%),
+    radial-gradient(52rem 52rem at -12% -6%, rgb(var(--ic-teal) / 0.14), transparent 52%),
+    radial-gradient(46rem 46rem at 50% 118%, rgb(var(--ic-sage) / 0.10), transparent 60%);
 }
 
-/* Gradient brand text. */
+/* Brand text — a gentle teal -> soft-blue blend. */
 .ic-gradient-text {
   background-image: linear-gradient(
-    100deg, rgb(var(--ic-accent-strong)), rgb(var(--ic-violet))
+    100deg, rgb(var(--ic-teal-strong)), rgb(var(--ic-sky))
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Card. */
+/* Card — soft, breathable, warm-neutral. */
 .ic-card {
-  border-radius: 1rem;
-  border: 1px solid rgb(226 232 240);          /* slate-200 */
-  background: rgb(255 255 255 / 0.85);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px -12px rgb(15 23 42 / 0.12);
+  border-radius: 1.1rem;
+  border: 1px solid rgb(231 226 218);          /* stone-200-ish */
+  background: rgb(255 255 254 / 0.86);
+  backdrop-filter: blur(7px);
+  box-shadow: 0 1px 2px rgb(40 50 48 / 0.04), 0 14px 32px -18px rgb(20 60 56 / 0.20);
 }
 .dark .ic-card {
-  border-color: rgb(51 65 85 / 0.7);           /* slate-700 */
-  background: rgb(15 23 42 / 0.6);             /* slate-900 */
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 28px -14px rgb(0 0 0 / 0.6);
+  border-color: rgb(46 60 58 / 0.7);
+  background: rgb(15 25 24 / 0.6);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 14px 36px -18px rgb(0 0 0 / 0.65);
 }
 
-/* Score / axis meter. */
+/* A soft "panel" tint used for grouped/quiet sections (calmer than slate). */
+.ic-panel {
+  background: rgb(244 246 244 / 0.7);
+}
+.dark .ic-panel {
+  background: rgb(18 30 28 / 0.5);
+}
+
+/* Score / axis meter — rounded, gently animated. */
 .ic-meter {
   height: 0.5rem;
   border-radius: 999px;
-  background: rgb(226 232 240);
+  background: rgb(229 230 226);
   overflow: hidden;
 }
-.dark .ic-meter { background: rgb(51 65 85); }
+.dark .ic-meter { background: rgb(38 50 48); }
 .ic-meter > span {
   display: block;
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgb(var(--ic-accent)), rgb(var(--ic-violet)));
-  transition: width .5s cubic-bezier(.22,.61,.36,1);
+  background: linear-gradient(90deg, rgb(var(--ic-teal)), rgb(var(--ic-sky)));
+  transition: width .6s cubic-bezier(.22,.61,.36,1);
 }
-/* Semantic meter fills by score band. */
-.ic-meter--low > span    { background: linear-gradient(90deg, #fb7185, #f43f5e); } /* rose */
-.ic-meter--mid > span    { background: linear-gradient(90deg, #fbbf24, #f59e0b); } /* amber */
-.ic-meter--high > span   { background: linear-gradient(90deg, #34d399, #10b981); } /* emerald */
+/* Semantic meter fills by score band — soft, supportive tones. */
+.ic-meter--low > span    { background: linear-gradient(90deg, rgb(var(--ic-low) / 0.85), rgb(var(--ic-low))); }
+.ic-meter--mid > span    { background: linear-gradient(90deg, rgb(var(--ic-mid) / 0.85), rgb(var(--ic-mid))); }
+.ic-meter--high > span   { background: linear-gradient(90deg, rgb(var(--ic-teal)), rgb(var(--ic-good))); }
 
-/* Conic score ring (hero + verdict). */
+/* Conic score ring (hero + verdict) — the calm focal point. */
 .ic-ring {
   --pct: 80;
   width: var(--size, 9rem);
@@ -84,24 +106,46 @@ body {
   place-content: center;
   text-align: center;
   background:
-    conic-gradient(rgb(var(--ic-accent)) calc(var(--pct) * 1%),
-      rgb(226 232 240) 0);
+    conic-gradient(from -90deg,
+      rgb(var(--ic-teal)) calc(var(--pct) * 1%),
+      rgb(226 228 223) 0);
   position: relative;
 }
 .dark .ic-ring {
   background:
-    conic-gradient(rgb(var(--ic-accent)) calc(var(--pct) * 1%),
-      rgb(51 65 85) 0);
+    conic-gradient(from -90deg,
+      rgb(var(--ic-teal)) calc(var(--pct) * 1%),
+      rgb(40 52 50) 0);
 }
+/* Tone variants so a low score reads supportive, not punishing. */
+.ic-ring--mid  { background: conic-gradient(from -90deg, rgb(var(--ic-mid))  calc(var(--pct) * 1%), rgb(226 228 223) 0); }
+.ic-ring--low  { background: conic-gradient(from -90deg, rgb(var(--ic-low))  calc(var(--pct) * 1%), rgb(226 228 223) 0); }
+.dark .ic-ring--mid { background: conic-gradient(from -90deg, rgb(var(--ic-mid)) calc(var(--pct) * 1%), rgb(40 52 50) 0); }
+.dark .ic-ring--low { background: conic-gradient(from -90deg, rgb(var(--ic-low)) calc(var(--pct) * 1%), rgb(40 52 50) 0); }
 .ic-ring::before {
   content: "";
   position: absolute;
-  inset: 0.55rem;
+  inset: 0.5rem;
   border-radius: 50%;
-  background: rgb(255 255 255);
+  background: rgb(255 255 254);
 }
-.dark .ic-ring::before { background: rgb(15 23 42); }
+.dark .ic-ring::before { background: rgb(15 25 24); }
 .ic-ring > * { position: relative; z-index: 1; }
+
+/* Soft pill / chip used for skills + statuses. */
+.ic-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* Gentle lift on interactive cards. */
+.ic-lift { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.ic-lift:hover { transform: translateY(-2px); }
 
 /* htmx loading affordance. */
 .htmx-indicator { opacity: 0; transition: opacity .15s ease; }
@@ -112,13 +156,24 @@ body {
 
 /* Fade-in for swapped / new content. */
 @keyframes ic-fade-in {
-  from { opacity: 0; transform: translateY(4px); }
+  from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.ic-fade { animation: ic-fade-in .22s ease both; }
+.ic-fade { animation: ic-fade-in .28s cubic-bezier(.22,.61,.36,1) both; }
 
-/* Focus ring. */
+/* A slow, calming pulse for the "live demo" dot — a breathing rhythm. */
+@keyframes ic-breathe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.55; transform: scale(0.82); }
+}
+.ic-breathe { animation: ic-breathe 3.2s ease-in-out infinite; }
+
+/* Focus ring — calm teal, clearly visible. */
 .ic-focus:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgb(var(--ic-accent) / 0.4);
+  box-shadow: 0 0 0 3px rgb(var(--ic-teal) / 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ic-fade, .ic-breathe, .ic-meter > span, .ic-lift { animation: none; transition: none; }
 }

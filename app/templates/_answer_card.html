@@ -6,15 +6,15 @@
 
 <article id="answer-{{ item.row.id }}" class="ic-card ic-fade overflow-hidden">
   <!-- Question header -->
-  <div class="flex items-start justify-between gap-3 border-b border-slate-200/70 px-5 py-4 dark:border-slate-800/70">
+  <div class="flex items-start justify-between gap-3 border-b border-stone-200/70 px-5 py-4 dark:border-white/10">
     <div class="min-w-0">
-      <span class="inline-flex items-center gap-1.5 rounded-full bg-violet-50 px-2.5 py-0.5 text-[11px] font-semibold capitalize text-violet-700 ring-1 ring-inset ring-violet-200 dark:bg-violet-500/10 dark:text-violet-300 dark:ring-violet-500/20">
+      <span class="ic-chip bg-sky2-50 capitalize text-sky2-700 ring-1 ring-inset ring-sky2-200/70 dark:bg-sky2-500/10 dark:text-sky2-300 dark:ring-sky2-400/20">
         {{ item.row.skill }}
       </span>
-      <h3 class="mt-2 text-[15px] font-semibold leading-snug text-slate-900 dark:text-slate-50">{{ item.row.question }}</h3>
+      <h3 class="mt-2 text-[15px] font-semibold leading-snug text-stone-900 dark:text-stone-50">{{ item.row.question }}</h3>
     </div>
     {% if scored %}
-    <span class="shrink-0 rounded-full bg-brand-50 px-3 py-1 text-sm font-bold text-brand-700 ring-1 ring-inset ring-brand-200 dark:bg-brand-500/10 dark:text-brand-300 dark:ring-brand-500/20">{{ item.row.percent }}/100</span>
+    <span class="shrink-0 rounded-full bg-brand-50 px-3 py-1 text-sm font-bold text-brand-700 ring-1 ring-inset ring-brand-200/70 dark:bg-brand-500/10 dark:text-brand-300 dark:ring-brand-400/20">{{ item.row.percent }}/100</span>
     {% endif %}
   </div>
 
@@ -27,70 +27,70 @@
         class="px-5 py-4">
     <label for="ans-{{ item.row.id }}" class="sr-only">Your answer</label>
     <textarea id="ans-{{ item.row.id }}" name="answer_text" rows="6" required
-      placeholder="Aim for a concrete situation, what you did, and the measurable result."
-      class="ic-focus w-full resize-y rounded-lg border border-slate-300 bg-white px-3.5 py-3 text-sm leading-relaxed text-slate-800 placeholder:text-slate-400 focus:border-brand-500 focus:ring-0 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"></textarea>
+      placeholder="Take your time. Aim for a real situation, what you did, and the result you can point to."
+      class="ic-focus w-full resize-y rounded-xl border border-stone-300 bg-white px-3.5 py-3 text-sm leading-relaxed text-stone-800 placeholder:text-stone-400 focus:border-brand-500 focus:ring-0 dark:border-white/15 dark:bg-white/5 dark:text-stone-100"></textarea>
     <div class="mt-3 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
         <button type="submit"
-                class="ic-focus inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700">
+                class="ic-focus inline-flex items-center gap-2 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-brand-700/20 transition hover:bg-brand-700">
           <span class="htmx-indicator h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white"></span>
           <span>Score my answer</span>
         </button>
         {% if sample_answer %}
         <button type="button" onclick="fillSampleAnswer(this)" data-sample="{{ sample_answer }}"
-                class="text-xs font-medium text-slate-500 underline-offset-2 transition hover:text-brand-600 hover:underline dark:text-slate-400 dark:hover:text-brand-400">
+                class="text-xs font-medium text-stone-500 underline-offset-2 transition hover:text-brand-700 hover:underline dark:text-stone-400 dark:hover:text-brand-300">
           Use a sample answer
         </button>
         {% endif %}
       </div>
-      <span class="htmx-indicator text-xs text-slate-400">Scoring…</span>
+      <span class="htmx-indicator text-xs text-stone-400">Reading your answer…</span>
     </div>
   </form>
 
   {% else %}
   <!-- Your answer -->
-  <div class="border-b border-slate-200/70 px-5 py-4 dark:border-slate-800/70">
-    <h4 class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Your answer</h4>
-    <p class="mt-1.5 whitespace-pre-wrap text-sm leading-relaxed text-slate-700 dark:text-slate-200">{{ item.row.answer_text }}</p>
+  <div class="border-b border-stone-200/70 px-5 py-4 dark:border-white/10">
+    <h4 class="text-[11px] font-semibold uppercase tracking-wider text-stone-400">Your answer</h4>
+    <p class="mt-1.5 whitespace-pre-wrap text-sm leading-relaxed text-stone-700 dark:text-stone-200">{{ item.row.answer_text }}</p>
   </div>
 
   <!-- Verdict -->
   {# Full static class strings per tone so Tailwind's JIT scanner sees them. #}
-  {% set badge_emerald = "bg-emerald-50 text-emerald-700 ring-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:ring-emerald-500/20" %}
-  {% set badge_amber = "bg-amber-50 text-amber-700 ring-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/20" %}
-  {% set badge_rose = "bg-rose-50 text-rose-700 ring-rose-200 dark:bg-rose-500/10 dark:text-rose-300 dark:ring-rose-500/20" %}
+  {% set badge_good = "bg-emerald-50 text-emerald-700 ring-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-300 dark:ring-emerald-500/20" %}
+  {% set badge_mid  = "bg-amber-50 text-amber-700 ring-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/20" %}
+  {% set badge_low  = "bg-orange-50 text-orange-800 ring-orange-200 dark:bg-orange-500/10 dark:text-orange-300 dark:ring-orange-500/20" %}
   {% set band = item.row.band %}
-  {% if band in ("Outstanding", "Strong") %}{% set verdict_cls = badge_emerald %}
-  {% elif band == "Solid, needs polish" %}{% set verdict_cls = badge_amber %}
-  {% else %}{% set verdict_cls = badge_rose %}{% endif %}
-  <div class="flex items-center gap-4 border-b border-slate-200/70 bg-slate-50/60 px-5 py-4 dark:border-slate-800/70 dark:bg-slate-900/40">
-    <div class="ic-ring shrink-0" style="--pct: {{ item.row.percent }}; --size: 4.75rem;">
-      <span class="block text-lg font-extrabold leading-none text-slate-800 dark:text-slate-100">{{ item.row.overall }}</span>
-      <span class="block text-[9px] font-semibold uppercase tracking-wider text-slate-400">/ 5</span>
+  {% if band in ("Outstanding", "Strong") %}{% set verdict_cls = badge_good %}{% set ring_tone = "" %}
+  {% elif band == "Solid, needs polish" %}{% set verdict_cls = badge_mid %}{% set ring_tone = " ic-ring--mid" %}
+  {% else %}{% set verdict_cls = badge_low %}{% set ring_tone = " ic-ring--low" %}{% endif %}
+  <div class="flex items-center gap-4 border-b border-stone-200/70 ic-panel px-5 py-4 dark:border-white/10">
+    <div class="ic-ring{{ ring_tone }} shrink-0" style="--pct: {{ item.row.percent }}; --size: 4.75rem;">
+      <span class="block text-lg font-bold leading-none text-stone-800 dark:text-stone-100">{{ item.row.overall }}</span>
+      <span class="block text-[9px] font-semibold uppercase tracking-wider text-stone-400">/ 5</span>
     </div>
     <div class="min-w-0">
       <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-inset {{ verdict_cls }}">
         {{ band }}
       </span>
-      <p class="mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{{ item.row.summary }}</p>
+      <p class="mt-1.5 text-sm leading-relaxed text-stone-600 dark:text-stone-300">{{ item.row.summary }}</p>
     </div>
   </div>
 
   <!-- Per-axis rubric -->
   <div class="px-5 py-4">
-    <h4 class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Rubric breakdown</h4>
+    <h4 class="text-[11px] font-semibold uppercase tracking-wider text-stone-400">Rubric breakdown</h4>
     <ul class="mt-3 space-y-3.5">
       {% for ax in item.axes %}
-      {% if ax.score <= 2 %}{% set tone = "low" %}{% set badge_cls = badge_rose %}
-      {% elif ax.score == 3 %}{% set tone = "mid" %}{% set badge_cls = badge_amber %}
-      {% else %}{% set tone = "high" %}{% set badge_cls = badge_emerald %}{% endif %}
+      {% if ax.score <= 2 %}{% set tone = "low" %}{% set badge_cls = badge_low %}
+      {% elif ax.score == 3 %}{% set tone = "mid" %}{% set badge_cls = badge_mid %}
+      {% else %}{% set tone = "high" %}{% set badge_cls = badge_good %}{% endif %}
       <li>
         <div class="flex items-baseline justify-between gap-3">
-          <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">{{ axis_labels.get(ax.axis_id, ax.axis_id|capitalize) }}</span>
+          <span class="text-sm font-semibold text-stone-700 dark:text-stone-200">{{ axis_labels.get(ax.axis_id, ax.axis_id|capitalize) }}</span>
           <span class="rounded-md px-2 py-0.5 text-xs font-bold ring-1 ring-inset {{ badge_cls }}">{{ ax.score }}/5</span>
         </div>
         <div class="ic-meter ic-meter--{{ tone }} mt-1.5"><span style="width: {{ (ax.score / 5 * 100)|int }}%"></span></div>
-        <p class="mt-1.5 text-xs leading-relaxed text-slate-500 dark:text-slate-400">{{ ax.reason }}</p>
+        <p class="mt-1.5 text-xs leading-relaxed text-stone-500 dark:text-stone-400">{{ ax.reason }}</p>
       </li>
       {% endfor %}
     </ul>
@@ -98,16 +98,16 @@
 
   <!-- Strengths / improvements -->
   {% if item.strengths or item.improvements %}
-  <div class="grid gap-px border-t border-slate-200/70 bg-slate-200/70 sm:grid-cols-2 dark:border-slate-800/70 dark:bg-slate-800/70">
+  <div class="grid gap-px border-t border-stone-200/70 bg-stone-200/70 sm:grid-cols-2 dark:border-white/10 dark:bg-white/10">
     {% if item.strengths %}
-    <div class="bg-white px-5 py-4 dark:bg-slate-950/40">
+    <div class="bg-stone-50 px-5 py-4 dark:bg-[#0c1413]/60">
       <h4 class="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
         <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        Strengths
+        What worked
       </h4>
       <ul class="mt-2 space-y-1.5">
         {% for s in item.strengths %}
-        <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
+        <li class="flex items-start gap-2 text-sm text-stone-600 dark:text-stone-300">
           <span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-emerald-500"></span>{{ s }}
         </li>
         {% endfor %}
@@ -115,15 +115,15 @@
     </div>
     {% endif %}
     {% if item.improvements %}
-    <div class="bg-white px-5 py-4 dark:bg-slate-950/40">
-      <h4 class="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-amber-600 dark:text-amber-400">
-        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
-        To improve
+    <div class="bg-stone-50 px-5 py-4 dark:bg-[#0c1413]/60">
+      <h4 class="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-brand-700 dark:text-brand-300">
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/><circle cx="12" cy="12" r="3"/></svg>
+        To try next time
       </h4>
       <ul class="mt-2 space-y-1.5">
         {% for s in item.improvements %}
-        <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
-          <span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-500"></span>{{ s }}
+        <li class="flex items-start gap-2 text-sm text-stone-600 dark:text-stone-300">
+          <span class="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-500"></span>{{ s }}
         </li>
         {% endfor %}
       </ul>

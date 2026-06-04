@@ -5,20 +5,33 @@
 <!-- Header -->
 <section class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
   <div>
-    <h1 class="text-3xl font-bold tracking-tight">Your practice history</h1>
-    <p class="mt-1 flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
+    <h1 class="text-3xl font-semibold tracking-tight">Your practice history</h1>
+    <p class="mt-1 flex items-center gap-1.5 text-sm text-stone-500 dark:text-stone-400">
       <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       {{ user.email }}
     </p>
   </div>
   <a href="/sessions/new"
-     class="inline-flex w-fit items-center gap-2 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700">
+     class="ic-focus inline-flex w-fit items-center gap-2 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-brand-700/20 transition hover:bg-brand-700">
     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
     New session
   </a>
 </section>
 
 {% if sessions %}
+<!-- Encouraging coach note -->
+<div class="mt-5 flex items-start gap-3 rounded-xl ic-panel px-4 py-3 text-sm text-stone-600 dark:text-stone-300">
+  <svg class="mt-0.5 h-4 w-4 shrink-0 text-brand-600 dark:text-brand-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <p>
+    {% if stats.total_answered == 0 %}
+      Your questions are ready whenever you are. Take one at a time — there's no clock here.
+    {% else %}
+      You've worked through <span class="font-semibold text-stone-800 dark:text-stone-100">{{ stats.total_answered }}</span>
+      answer{{ "s" if stats.total_answered != 1 else "" }} so far. Steady practice is exactly how this gets easier.
+    {% endif %}
+  </p>
+</div>
+
 <!-- KPI cards -->
 <section class="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
   {% set kpis = [
@@ -30,39 +43,45 @@
   {% for label, value, path in kpis %}
   <div class="ic-card p-5">
     <div class="flex items-center justify-between">
-      <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">{{ label }}</span>
-      <span class="grid h-8 w-8 place-items-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
+      <span class="text-xs font-semibold uppercase tracking-wider text-stone-400">{{ label }}</span>
+      <span class="grid h-8 w-8 place-items-center rounded-lg bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-300">
         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ path }}"/></svg>
       </span>
     </div>
-    <div class="mt-2 text-2xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">{{ value }}</div>
+    <div class="mt-2 text-2xl font-bold tracking-tight text-stone-800 dark:text-stone-100">{{ value }}</div>
   </div>
   {% endfor %}
 </section>
 
 <!-- Session cards -->
 <section class="mt-8">
-  <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400">Sessions</h2>
+  <h2 class="text-xs font-semibold uppercase tracking-wider text-stone-400">Sessions</h2>
   <div class="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {% for s in sessions %}
     {% set pct = s.average_percent %}
     {% set total = s.answers|length %}
     {% set done = s.answered_count %}
+    {% if pct is none %}{% set ring_tone = "" %}
+    {% elif pct >= 60 %}{% set ring_tone = "" %}
+    {% elif pct >= 35 %}{% set ring_tone = " ic-ring--mid" %}
+    {% else %}{% set ring_tone = " ic-ring--low" %}{% endif %}
     <a href="/sessions/{{ s.id }}"
-       class="ic-card group flex flex-col p-5 transition hover:-translate-y-0.5 hover:border-brand-300 dark:hover:border-brand-500/50">
+       class="ic-card ic-lift group flex flex-col p-5 hover:border-brand-300 dark:hover:border-brand-400/40">
       <div class="flex items-start justify-between gap-3">
-        <h3 class="line-clamp-2 font-semibold text-slate-800 group-hover:text-brand-600 dark:text-slate-100 dark:group-hover:text-brand-400">{{ s.role_title }}</h3>
+        <h3 class="line-clamp-2 font-semibold text-stone-800 group-hover:text-brand-700 dark:text-stone-100 dark:group-hover:text-brand-300">{{ s.role_title }}</h3>
         {% if pct is not none %}
-          <span class="shrink-0 rounded-full bg-brand-50 px-2.5 py-1 text-xs font-bold text-brand-700 ring-1 ring-inset ring-brand-200 dark:bg-brand-500/10 dark:text-brand-300 dark:ring-brand-500/20">{{ pct }}</span>
+          <div class="ic-ring{{ ring_tone }} shrink-0" style="--pct: {{ pct }}; --size: 3.1rem;">
+            <span class="block text-xs font-bold text-stone-800 dark:text-stone-100">{{ pct }}</span>
+          </div>
         {% else %}
-          <span class="shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-500 dark:bg-slate-800 dark:text-slate-400">new</span>
+          <span class="ic-chip shrink-0 bg-sky2-50 text-sky2-700 ring-1 ring-inset ring-sky2-200/70 dark:bg-sky2-500/10 dark:text-sky2-300 dark:ring-sky2-400/20">new</span>
         {% endif %}
       </div>
 
-      <p class="mt-2 line-clamp-2 text-sm text-slate-500 dark:text-slate-400">{{ s.job_description }}</p>
+      <p class="mt-2 line-clamp-2 text-sm text-stone-500 dark:text-stone-400">{{ s.job_description }}</p>
 
       <div class="mt-auto pt-4">
-        <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+        <div class="flex items-center justify-between text-xs text-stone-500 dark:text-stone-400">
           <span>{{ done }}/{{ total }} answered</span>
           <span>{{ s.created_at.strftime("%b %d, %Y") }}</span>
         </div>
@@ -77,15 +96,15 @@
 <!-- Empty state -->
 <section class="mt-10">
   <div class="ic-card flex flex-col items-center gap-4 px-6 py-16 text-center">
-    <span class="grid h-14 w-14 place-items-center rounded-2xl bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400">
-      <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+    <span class="grid h-14 w-14 place-items-center rounded-2xl bg-brand-50 text-brand-700 dark:bg-brand-500/10 dark:text-brand-300">
+      <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
     </span>
     <div>
-      <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100">No sessions yet</h3>
-      <p class="mx-auto mt-1 max-w-sm text-sm text-slate-500 dark:text-slate-400">Paste a job description to generate your first set of role-specific interview questions.</p>
+      <h3 class="text-lg font-semibold text-stone-800 dark:text-stone-100">Let's begin when you're ready</h3>
+      <p class="mx-auto mt-1 max-w-sm text-sm text-stone-500 dark:text-stone-400">Paste a job description and your coach will draw up a first set of role-specific questions — no rush.</p>
     </div>
     <a href="/sessions/new"
-       class="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700">
+       class="ic-focus inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-brand-700/20 transition hover:bg-brand-700">
       <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       Create your first session
     </a>

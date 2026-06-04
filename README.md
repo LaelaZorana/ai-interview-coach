@@ -86,7 +86,7 @@ docker compose up --build      # then open http://localhost:8000
 ## Tech stack
 
 - **Backend:** Python, FastAPI, Starlette
-- **Templating / UI:** Jinja2 + htmx (server-rendered, no build step), Tailwind CSS (vendored offline) with a light/dark theme toggle, Inter, and an indigo accent
+- **Templating / UI:** Jinja2 + htmx (server-rendered, no build step), Tailwind CSS (vendored offline) with a light/dark theme toggle, a calm teal/sage "Calm Coach" palette, and an offline-first system font stack (no web-font CDN)
 - **Data:** SQLite via SQLAlchemy 2.0 (typed ORM)
 - **Auth:** stdlib-only — PBKDF2-HMAC-SHA256 password hashing + HMAC-signed session cookies (no heavy auth deps)
 - **LLM:** pluggable provider interface (offline stub / Anthropic / OpenAI), SDKs imported lazily

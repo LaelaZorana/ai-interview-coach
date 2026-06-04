@@ -1,40 +1,40 @@
-<header class="sticky top-0 z-30 border-b border-slate-200/70 bg-white/70 backdrop-blur-md dark:border-slate-800/70 dark:bg-slate-950/70">
+<header class="sticky top-0 z-30 border-b border-stone-200/70 bg-stone-50/80 backdrop-blur-md dark:border-white/10 dark:bg-[#0c1413]/80">
   <div class="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
     <a href="/" class="flex items-center gap-2.5 group">
-      <span class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-600 to-violet-500 text-white shadow-lg shadow-brand-500/30">
-        <!-- pencil / coaching mark -->
+      <span class="grid h-9 w-9 place-items-center rounded-2xl bg-gradient-to-br from-brand-600 to-sky2-500 text-white shadow-lg shadow-brand-700/25">
+        <!-- calm compass: a steady bearing -->
         <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 20h9" />
-          <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
         </svg>
       </span>
       <span class="flex flex-col leading-none">
         <span class="text-base font-bold tracking-tight">Interview<span class="ic-gradient-text">Coach</span></span>
-        <span class="text-[10px] font-medium uppercase tracking-wider text-slate-400 dark:text-slate-500">Rubric-scored practice</span>
+        <span class="text-[10px] font-medium uppercase tracking-[0.14em] text-stone-400 dark:text-stone-500">Your calm interview coach</span>
       </span>
     </a>
 
     <nav class="flex items-center gap-1 sm:gap-2">
       {% if user %}
-        <a href="/dashboard" class="rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-slate-100 dark:hover:bg-slate-800 {% if active == 'dashboard' %}text-brand-600 dark:text-brand-400{% else %}text-slate-600 dark:text-slate-300{% endif %}">Dashboard</a>
+        <a href="/dashboard" class="rounded-lg px-3 py-2 text-sm font-medium transition hover:bg-stone-200/60 dark:hover:bg-white/5 {% if active == 'dashboard' %}text-brand-700 dark:text-brand-300{% else %}text-stone-600 dark:text-stone-300{% endif %}">Dashboard</a>
         <a href="/sessions/new"
-           class="ml-1 inline-flex items-center gap-1.5 rounded-lg bg-brand-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700">
+           class="ml-1 inline-flex items-center gap-1.5 rounded-xl bg-brand-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-700/20 transition hover:bg-brand-700">
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           <span class="hidden sm:inline">New session</span>
         </a>
         <form action="/logout" method="post" class="contents">
-          <button type="submit" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">Log out</button>
+          <button type="submit" class="rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition hover:bg-stone-200/60 dark:text-stone-300 dark:hover:bg-white/5">Log out</button>
         </form>
       {% else %}
-        <a href="/login" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">Log in</a>
+        <a href="/login" class="rounded-lg px-3 py-2 text-sm font-medium text-stone-600 transition hover:bg-stone-200/60 dark:text-stone-300 dark:hover:bg-white/5">Log in</a>
         <a href="/signup"
-           class="ml-1 inline-flex items-center gap-1.5 rounded-lg bg-brand-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700">
-          Sign up
+           class="ml-1 inline-flex items-center gap-1.5 rounded-xl bg-brand-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm shadow-brand-700/20 transition hover:bg-brand-700">
+          Start practising
         </a>
       {% endif %}
 
       <button type="button" onclick="toggleTheme()" aria-label="Toggle dark mode"
-              class="ic-focus ml-1 grid h-9 w-9 place-items-center rounded-lg text-slate-500 transition hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800">
+              class="ic-focus ml-1 grid h-9 w-9 place-items-center rounded-lg text-stone-500 transition hover:bg-stone-200/60 dark:text-stone-400 dark:hover:bg-white/5">
         <svg class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
         <svg class="hidden h-5 w-5 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
@@ -42,10 +42,10 @@
   </div>
 
   {% if not using_real_llm %}
-  <div class="border-b border-brand-200/50 bg-brand-50/70 dark:border-brand-500/20 dark:bg-brand-500/5">
-    <div class="mx-auto flex max-w-6xl items-center gap-2 px-4 sm:px-6 lg:px-8 py-1.5 text-xs text-brand-800 dark:text-brand-200">
+  <div class="border-b border-sage-200/60 bg-sage-50/70 dark:border-sage-400/15 dark:bg-sage-500/5">
+    <div class="mx-auto flex max-w-6xl items-center gap-2 px-4 sm:px-6 lg:px-8 py-1.5 text-xs text-sage-800 dark:text-sage-200">
       <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-      <span><strong>Offline demo mode</strong> — deterministic local scoring, no API key required. Set <code class="rounded bg-brand-100 px-1 py-0.5 font-mono text-[10px] dark:bg-brand-500/20">ANTHROPIC_API_KEY</code> or <code class="rounded bg-brand-100 px-1 py-0.5 font-mono text-[10px] dark:bg-brand-500/20">OPENAI_API_KEY</code> for a live model.</span>
+      <span><strong>Offline demo mode</strong> — deterministic local scoring, no API key required. Set <code class="rounded bg-sage-100 px-1 py-0.5 font-mono text-[10px] dark:bg-sage-500/20">ANTHROPIC_API_KEY</code> or <code class="rounded bg-sage-100 px-1 py-0.5 font-mono text-[10px] dark:bg-sage-500/20">OPENAI_API_KEY</code> for a live model.</span>
     </div>
   </div>
   {% endif %}
