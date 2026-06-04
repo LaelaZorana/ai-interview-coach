@@ -63,7 +63,7 @@ InterviewCoach is starting on http://127.0.0.1:8000
 Demo login:  demo@interviewcoach.dev  /  demopass123
 ```
 
-Open <http://127.0.0.1:8000> and click **Try the live demo** (or visit `/demo`) to land straight inside a seeded, already-scored session — no signup, no keys. You can also log in with the demo credentials, sign up, paste a job description, and start practising.
+Open <http://127.0.0.1:8000> and click **Try the live demo** (or visit `/demo`) to land straight inside a seeded, already-scored session, with no signup and no keys. You can also log in with the demo credentials, sign up, paste a job description, and start practising.
 
 Run the tests:
 
