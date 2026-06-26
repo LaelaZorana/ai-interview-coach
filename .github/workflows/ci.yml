@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Lint (ruff)
+        run: ruff check app scripts tests
+
+      - name: Test (pytest)
+        run: pytest -q
+
+      - name: Smoke test (boots offline, no API key)
+        run: |
+          python -m scripts.seed
+          python -c "from fastapi.testclient import TestClient; from app.main import app; \
+            r = TestClient(app).get('/health'); assert r.json()['provider'] == 'stub', r.text; \
+            print('smoke ok:', r.json())"
