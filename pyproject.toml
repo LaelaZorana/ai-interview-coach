@@ -10,6 +10,9 @@ authors = [{ name = "Laela Zorana" }]
 [tool.pytest.ini_options]
 addopts = "-q"
 testpaths = ["tests"]
+# Put the repo root on sys.path so `import app` resolves under the bare `pytest`
+# console script (used in CI), not only under `python -m pytest` (which adds CWD).
+pythonpath = ["."]
 filterwarnings = ["error::DeprecationWarning"]
 
 [tool.ruff]
