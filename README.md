@@ -127,14 +127,6 @@ docker run -p 8000:8000 -e SECRET_KEY=$(python -c "import secrets;print(secrets.
 
 Set a strong `SECRET_KEY` in production; without a provider key the app stays in deterministic offline mode.
 
-## Screenshots
-
-> _Placeholder._ Run `make demo` and open <http://127.0.0.1:8000> (or click **Try the live demo**) to see the live UI in light or dark mode: the marketing landing page, the history dashboard with KPI cards, and a scored answer with the per-axis rubric breakdown. Add captured images to a `docs/` folder and link them here.
-
-| Landing | Dashboard | Scored answer |
-| --- | --- | --- |
-| _add screenshot_ | _add screenshot_ | _add screenshot_ |
-
 ## License
 
 MIT. See [LICENSE](LICENSE).
